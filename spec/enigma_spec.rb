@@ -14,14 +14,14 @@ RSpec.describe Enigma do
       'w', 'x', 'y', 'z', ' '])
   end
 
-  it 'can generate todays date' do
+  it 'can generate todays date if a key not passed to enigma' do
     todays_date = Date.new(2018, 8, 4)
     allow(todays_date).to receive(:generate_date).and_return('040818')
     # expect(enigma.generate_date).to eq('101122')
   end
 
-  it 'can generate a random number for a key' do
-    allow(enigma).to receive(:generate_key).and_return('71812')
+  it 'can generate a random number if a key not passed to enigma' do
+    allow(enigma).to receive(:random_num).and_return('71812')
     # expect(enigma.generate_key).to eq(87654)
   end
 
@@ -40,6 +40,15 @@ RSpec.describe Enigma do
 
   it 'can split a message into individual strings' do
     expect(enigma.split_msg('hey there')).to eq(['h', 'e', 'y', ' ', 't', 'h', 'e', 'r', 'e'])
+  end
+
+  it 'can set the keys' do
+    expect(enigma.set_keys('02715')).to eq({
+                A: 02,
+                B: 27,
+                C: 71,
+                D: 15
+            })
   end
 
   xit 'can encrypt a message with a key and date' do
