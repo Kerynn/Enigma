@@ -38,11 +38,11 @@ class Enigma
   end
 
   def set_keys(key)
-    key_hash = {}
-    key_hash[:A] = key[0..1].to_i
-    key_hash[:B] = key[1..2].to_i
-    key_hash[:C] = key[2..3].to_i
-    key_hash[:D] = key[3..4].to_i
-    key_hash
+    key_array = []
+    key_array << key[0..1].to_i
+    key_array << key[1..2].to_i
+    key_array << key[2..3].to_i
+    key_array << key[3..4].to_i
+    key_array
   end
 end
