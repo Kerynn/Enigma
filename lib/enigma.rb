@@ -22,6 +22,10 @@ class Enigma
     encrypt_hash
   end
 
+  def split_msg(message)
+    message.split('')
+  end
+
   def offset(date)
     off_date = date.to_i
     squared_date = off_date * off_date

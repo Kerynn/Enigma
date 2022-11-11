@@ -36,6 +36,9 @@ RSpec.describe Enigma do
     expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
   end
 
+  it 'can split a message into individual strings' do
+    expect(enigma.split_msg('hey there')).to eq(['h', 'e', 'y', ' ', 't', 'h', 'e', 'r', 'e'])
+  end
 
   xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
