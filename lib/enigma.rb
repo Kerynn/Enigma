@@ -15,8 +15,12 @@ class Enigma
   end
 
   def encrypt(message, key = random_num, date = generate_date)
+    g_key = set_keys(key)
+    offset_date = offset(date)
+    keys = generate_keys(g_key, offset_date)
+
     encrypt_hash = {}
-    encrypt_hash[:encryption] = message #encrypted message, method
+    encrypt_hash[:encryption] = shift_message(message, keys)
     encrypt_hash[:key] = key
     encrypt_hash[:date] = date
     encrypt_hash
@@ -27,14 +31,13 @@ class Enigma
   end
 
   def offset(date)
-    off_date = date.to_i
-    squared_date = off_date * off_date
+    integer_date = date.to_i
+    squared_date = integer_date * integer_date
     final_four = squared_date.to_s[-4..-1]
     split_strings = final_four.split('')
     offsets = split_strings.map do |num|
       num.to_i
     end
-    offsets
   end
 
   def set_keys(key)
@@ -47,11 +50,41 @@ class Enigma
   end
 
   def generate_keys(keys, offset)
-    key_hash = {}
+    key_hash = Hash.new(0)
     key_hash[:A] = keys[0] + offset[0]
     key_hash[:B] = keys[1] + offset[1]
     key_hash[:C] = keys[2] + offset[2]
     key_hash[:D] = keys[3] + offset[3]
     key_hash
+  end
+
+  def shift_message(message, keys)
+    msg_array = split_msg(message)
+    a_array = []
+    b_array = []
+    c_array = []
+    d_array = []
+    until msg_array.empty? do
+      a_array << msg_array[0]
+      b_array << msg_array[1] if msg_array[1]
+      c_array << msg_array[2] if msg_array[2]
+      d_array << msg_array[3] if msg_array[3]
+      msg_array.shift(4)
+    end
+    keys_array = [[a_array, keys[:A]], [b_array, keys[:B]], [c_array, keys[:C]], [d_array, keys[:D]]]
+    final = keys_array.map do |msg_char, value|
+      msg_char.map do |char|
+      indexed_position = (characters.find_index(char) + value)
+      characters[indexed_position]
+    end
+  end
+  string_char = ''
+    until final.join.empty? do
+      final.map.with_index do |shift_char, index|
+        string_char << shift_char[0] if shift_char[0]
+        shift_char.shift
+       end
+    end
+    string_char
   end
 end

@@ -55,7 +55,15 @@ RSpec.describe Enigma do
             })
   end
 
-  xit 'can encrypt a message with a key and date' do
+  # it 'can change the message to be encrypted' do
+  #   expect(enigma.shift_message('h', {A: 3})).to eq('k')
+  # end
+
+  it 'can change the message to be encrypted' do
+    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnr')
+  end
+
+  it 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
               key: '02715',
