@@ -46,14 +46,14 @@ RSpec.describe Enigma do
     expect(enigma.set_keys('02715')).to eq([02, 27, 71, 15])
   end
 
-  # it 'can generate the keys' do
-  #   expect(enigma.generate_keys).to eq({
-  #               A:
-  #               B:
-  #               C:
-  #               D:
-  #           })
-  # end
+  it 'can generate the keys' do
+    expect(enigma.generate_keys([02, 27, 71, 15], [1, 0, 2, 5])).to eq({
+                A: 3,
+                B: 27,
+                C: 73,
+                D: 20
+            })
+  end
 
   xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({

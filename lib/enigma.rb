@@ -45,4 +45,13 @@ class Enigma
     key_array << key[3..4].to_i
     key_array
   end
+
+  def generate_keys(keys, offset)
+    key_hash = {}
+    key_hash[:A] = keys[0] + offset[0]
+    key_hash[:B] = keys[1] + offset[1]
+    key_hash[:C] = keys[2] + offset[2]
+    key_hash[:D] = keys[3] + offset[3]
+    key_hash
+  end
 end
