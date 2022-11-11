@@ -10,6 +10,10 @@ class Enigma
     Date.today.strftime('%d%m%y')
   end
 
+  def generate_key
+    rand(00000...99999)
+  end
+
   def encrypt(message, key, date)
     encrypt_hash = {}
     encrypt_hash[:encryption] = message #encrypted message, method

@@ -19,8 +19,9 @@ RSpec.describe Enigma do
     allow(todays_date).to receive(:generate_date).and_return('040818')
   end
 
-  xit 'can generate a random number for a key' do
-    expect()
+  it 'can generate a random number for a key' do
+    allow(enigma).to receive(:generate_key).and_return(71812)
+    # expect(enigma.generate_key).to eq(71812)
   end
 
   xit 'can offset the date' do
