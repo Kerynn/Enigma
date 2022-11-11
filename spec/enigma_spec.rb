@@ -14,6 +14,21 @@ RSpec.describe Enigma do
       'w', 'x', 'y', 'z', ' '])
   end
 
+  it 'can generate todays date' do #need to figure out when test does not work tomorrow
+    expect(enigma.generate_date).to eq('101122')
+  end
+
+  it 'can generate a random number for a key' do
+    expect()
+  end
+
+  xit 'can offset the date' do
+    expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
+  end
+
+
+
+
   xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
