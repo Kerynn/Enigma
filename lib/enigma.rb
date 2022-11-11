@@ -22,9 +22,14 @@ class Enigma
     encrypt_hash
   end
 
-  # def offset(date)
-  #   off_date = date.to_i
-  #   squared_date = off_date * off_date
-  #
-  # end
+  def offset(date)
+    off_date = date.to_i
+    squared_date = off_date * off_date
+    final_four = squared_date.to_s[-4..-1]
+    split_strings = final_four.split('')
+    offsets = split_strings.map do |num|
+      num.to_i
+    end
+    offsets
+  end
 end

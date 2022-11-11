@@ -32,6 +32,11 @@ RSpec.describe Enigma do
             })
   end
 
+  it 'can offset the date' do
+    expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
+  end
+
+
   xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
@@ -39,11 +44,4 @@ RSpec.describe Enigma do
               date: '040895'
           })
   end
-
-  xit 'can offset the date' do
-    expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
-  end
-
-
-
 end
