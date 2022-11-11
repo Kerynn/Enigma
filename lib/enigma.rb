@@ -14,7 +14,7 @@ class Enigma
     rand(00000...99999)
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key = generate_key, date = generate_date)
     encrypt_hash = {}
     encrypt_hash[:encryption] = message #encrypted message, method
     encrypt_hash[:key] = key

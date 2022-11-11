@@ -21,15 +21,16 @@ RSpec.describe Enigma do
 
   it 'can generate a random number for a key' do
     allow(enigma).to receive(:generate_key).and_return(71812)
-    # expect(enigma.generate_key).to eq(71812)
   end
 
-  xit 'can offset the date' do
-    expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
+  it 'can encrypt a message without a date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:encrypt).and_return({
+                  encryption: 'keder ohulw',
+                  key: '02715',
+                  date: '040818'
+            })
   end
-
-
-
 
   xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
@@ -37,6 +38,10 @@ RSpec.describe Enigma do
               key: '02715',
               date: '040895'
           })
+  end
+
+  xit 'can offset the date' do
+    expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
   end
 
 
