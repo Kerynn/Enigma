@@ -11,7 +11,7 @@ class Enigma
   end
 
   def generate_key
-    rand(00000...99999)
+    rand(00000...99999).to_s
   end
 
   def encrypt(message, key = generate_key, date = generate_date)

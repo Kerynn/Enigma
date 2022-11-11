@@ -17,10 +17,12 @@ RSpec.describe Enigma do
   it 'can generate todays date' do
     todays_date = Date.new(2018, 8, 4)
     allow(todays_date).to receive(:generate_date).and_return('040818')
+    # expect(enigma.generate_date).to eq('101122')
   end
 
   it 'can generate a random number for a key' do
-    allow(enigma).to receive(:generate_key).and_return(71812)
+    allow(enigma).to receive(:generate_key).and_return('71812')
+    # expect(enigma.generate_key).to eq(87654)
   end
 
   it 'can encrypt a message without a date' do
