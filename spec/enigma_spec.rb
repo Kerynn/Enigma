@@ -57,12 +57,16 @@ RSpec.describe Enigma do
             })
   end
 
-  xit 'can create an array of the message characters for each key' do
+  it 'can create an array of the message characters for each key' do
     expect(enigma.key_arrays('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([[['h', 'o'], 3], [['e'], 5], [['l'], 1]], [['l'], 2])
   end
 
+  xit 'can create an array of 4 arrays of the shifted characters of the message' do
+    expect(enigma.shifted_characters('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([['k', 'r'], ['j'], ['m'], ['n']])
+  end
+
   xit 'can change the message to be encrypted' do
-    expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
+    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
   end
 
   xit 'can encrypt a message with a key and date' do
