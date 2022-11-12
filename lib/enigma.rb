@@ -3,32 +3,6 @@ require_relative 'random_generator'
 class Enigma
   include RandomGenerator
 
-  def encrypt(message, key = random_num, date = generate_date)
-    first_key = set_keys(key)
-    offset_date = offset(date)
-    final_keys = generate_keys(first_key, offset_date)
-    encrypt_hash = {}
-    encrypt_hash[:encryption] = shift_message(message, final_keys)
-    encrypt_hash[:key] = key
-    encrypt_hash[:date] = date
-    encrypt_hash
-  end
-
-  def decrypt(encrypt_message, key = random_num, date = generate_date)
-    first_key = set_keys(key)
-    offset_date = offset(date)
-    final_keys = generate_keys(first_key, offset_date)
-    encrypt_hash = {}
-    encrypt_hash[:decryption] = unshift_message(encrypt_message, final_keys)
-    encrypt_hash[:key] = key
-    encrypt_hash[:date] = date
-    encrypt_hash
-  end
-
-  def split_msg(message)
-    message.split('')
-  end
-
   def offset(date)
     integer_date = date.to_i
     squared_date = integer_date * integer_date
@@ -57,6 +31,10 @@ class Enigma
     key_hash
   end
 
+  def split_msg(message)
+    message.split('')
+  end
+
   def converted_char(char, key_value)
     indexed_position = (characters.find_index(char) + key_value)
     if indexed_position > 26
@@ -80,6 +58,17 @@ class Enigma
     msg_string
   end
 
+  def encrypt(message, key = random_num, date = generate_date)
+    first_key = set_keys(key)
+    offset_date = offset(date)
+    final_keys = generate_keys(first_key, offset_date)
+    encrypt_hash = {}
+    encrypt_hash[:encryption] = shift_message(message, final_keys)
+    encrypt_hash[:key] = key
+    encrypt_hash[:date] = date
+    encrypt_hash
+  end
+
   def reconvert_char(char, key_value)
     indexed_position = (characters.find_index(char) - key_value)
     large_chars = characters * 10
@@ -97,5 +86,16 @@ class Enigma
       msg_array.shift(4)
     end
     msg_string
+  end
+
+  def decrypt(encrypt_message, key = random_num, date = generate_date)
+    first_key = set_keys(key)
+    offset_date = offset(date)
+    final_keys = generate_keys(first_key, offset_date)
+    encrypt_hash = {}
+    encrypt_hash[:decryption] = unshift_message(encrypt_message, final_keys)
+    encrypt_hash[:key] = key
+    encrypt_hash[:date] = date
+    encrypt_hash
   end
 end

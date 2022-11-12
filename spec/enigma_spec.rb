@@ -12,10 +12,6 @@ RSpec.describe Enigma do
     expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
   end
 
-  it 'can split a message into individual strings' do
-    expect(enigma.split_msg('hey there')).to eq(['h', 'e', 'y', ' ', 't', 'h', 'e', 'r', 'e'])
-  end
-
   it 'can set the keys' do
     expect(enigma.set_keys('02715')).to eq([02, 27, 71, 15])
   end
@@ -27,6 +23,10 @@ RSpec.describe Enigma do
                 C: 73,
                 D: 20
             })
+  end
+
+  it 'can split a message into individual strings' do
+    expect(enigma.split_msg('hey there')).to eq(['h', 'e', 'y', ' ', 't', 'h', 'e', 'r', 'e'])
   end
 
   it 'can convert the characters to their converted indexed_position' do
@@ -70,7 +70,7 @@ RSpec.describe Enigma do
     expect(enigma.reconvert_char('c', 10)).to eq('t')
   end
 
-  it 'can decrypt the message' do
+  it 'can unshift the message to be the original message' do
     expect(enigma.unshift_message('kjmnr', {A: 3, B: 5, C: 1, D: 2})).to eq('hello')
     expect(enigma.unshift_message('kjmnreujhwf', {A: 3, B: 5, C: 1, D: 2})).to eq('hello there')
   end
