@@ -68,28 +68,28 @@ class Enigma
     key_hash
   end
 
-  def converted_char(char, key_value)
-    indexed_position = (characters.find_index(char) + key_value)
-    if indexed_position > 26
-      large_chars = characters * 10
-      large_chars[indexed_position]
-    else
-      characters[indexed_position]
-    end
-  end
-
-  def shift_message(message, keys)
-    msg_array = split_msg(message)
-    msg_string = ''
-    until msg_array.empty? do
-      msg_string << converted_char(msg_array[0], keys[:A])
-      msg_string << converted_char(msg_array[1], keys[:B]) if msg_array[1]
-      msg_string << converted_char(msg_array[2], keys[:C]) if msg_array[2]
-      msg_string << converted_char(msg_array[3], keys[:D]) if msg_array[3]
-      msg_array.shift(4)
-    end
-    msg_string
-  end
+  # def converted_char(char, key_value)
+  #   indexed_position = (characters.find_index(char) + key_value)
+  #   if indexed_position > 26
+  #     large_chars = characters * 10
+  #     large_chars[indexed_position]
+  #   else
+  #     characters[indexed_position]
+  #   end
+  # end
+  #
+  # def shift_message(message, keys)
+  #   msg_array = split_msg(message)
+  #   msg_string = ''
+  #   until msg_array.empty? do
+  #     msg_string << converted_char(msg_array[0], keys[:A])
+  #     msg_string << converted_char(msg_array[1], keys[:B]) if msg_array[1]
+  #     msg_string << converted_char(msg_array[2], keys[:C]) if msg_array[2]
+  #     msg_string << converted_char(msg_array[3], keys[:D]) if msg_array[3]
+  #     msg_array.shift(4)
+  #   end
+  #   msg_string
+  # end
 
   def reconvert_char(char, key_value)
     indexed_position = (characters.find_index(char) - key_value)
