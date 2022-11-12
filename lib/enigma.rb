@@ -93,8 +93,8 @@ class Enigma
 
   def reconvert_char(char, key_value)
     indexed_position = (characters.find_index(char) - key_value)
-      large_chars = characters * 10
-      large_chars[indexed_position]
+    large_chars = characters * 10
+    large_chars[indexed_position]
   end
 
   def unshift_message(encrypt_message, keys)
