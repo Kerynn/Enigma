@@ -15,25 +15,13 @@ RSpec.describe Enigma do
   end
 
   it 'can generate todays date if a key not passed to enigma' do
-    # todays_date = Date.new(2018, 8, 4)
-    # allow(todays_date).to receive(:generate_date).and_return('040818')
     expect(enigma.generate_date).to be_a(String)
     expect(enigma.generate_date.length).to eq(6)
   end
 
   it 'can generate a random number if a key not passed to enigma' do
-    # allow(enigma).to receive(:random_num).and_return('71812')
     expect(enigma.random_num).to be_a(String)
     expect(enigma.random_num.length).to eq(5)
-  end
-
-  it 'can encrypt a message without a date' do
-    todays_date = Date.new(2018, 8, 4)
-    allow(todays_date).to receive(:encrypt).and_return({
-                  encryption: 'keder ohulw',
-                  key: '02715',
-                  date: '040818'
-            })
   end
 
   it 'can offset the date' do
@@ -57,23 +45,66 @@ RSpec.describe Enigma do
             })
   end
 
-  it 'can create an array of the message characters for each key' do
-    expect(enigma.key_arrays('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([[['h', 'o'], 3], [['e'], 5], [['l'], 1]], [['l'], 2])
+  it 'can convert the characters to their converted indexed_position' do
+    expect(enigma.converted_char('h', 3)).to eq('k')
+    expect(enigma.converted_char('t', 10)).to eq('c')
   end
 
-  xit 'can create an array of 4 arrays of the shifted characters of the message' do
-    expect(enigma.shifted_characters('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([['k', 'r'], ['j'], ['m'], ['n']])
+  it 'can change the message to be encrypted' do
+    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnr')
+    expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
   end
 
-  xit 'can change the message to be encrypted' do
-    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
-  end
-
-  xit 'can encrypt a message with a key and date' do
+  it 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
               key: '02715',
               date: '040895'
           })
+  end
+
+  it 'can encrypt a message without a date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:encrypt).and_return({
+                  encryption: 'keder ohulw',
+                  key: '02715',
+                  date: '040818'
+            })
+  end
+
+  xit 'can encrypt a message without a key or date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:encrypt).and_return({
+                  encryption: 'keder ohulw',
+                  key: '02715',
+                  date: '040818'
+            })
+  end
+
+  it 'can reconvert the characters to their original indexed_position' do
+    expect(enigma.reconvert_char('k', 3)).to eq('h')
+    expect(enigma.reconvert_char('c', 10)).to eq('t')
+  end
+
+  it 'can decrypt the message' do
+    expect(enigma.unshift_message('kjmnr', {A: 3, B: 5, C: 1, D: 2})).to eq('hello')
+    expect(enigma.unshift_message('kjmnreujhwf', {A: 3, B: 5, C: 1, D: 2})).to eq('hello there')
+  end
+
+  it 'can decrypt a message with a key and date' do
+    expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq({
+              decryption: "hello world",
+              key: "02715",
+              date: "040895"
+          })
+  end
+
+  it 'can decrypt a message without a date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:decrypt).and_return({
+                  encryption: 'hello world',
+                  key: '02715',
+                  date: '040818'
+            })
   end
 end
