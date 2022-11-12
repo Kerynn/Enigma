@@ -8,22 +8,6 @@ RSpec.describe Enigma do
     expect(enigma).to be_a(Enigma)
   end
 
-  it 'has a character set' do
-    expect(enigma.characters).to eq(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-      'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-      'w', 'x', 'y', 'z', ' '])
-  end
-
-  it 'can generate todays date if a key not passed to enigma' do
-    expect(enigma.generate_date).to be_a(String)
-    expect(enigma.generate_date.length).to eq(6)
-  end
-
-  it 'can generate a random number if a key not passed to enigma' do
-    expect(enigma.random_num).to be_a(String)
-    expect(enigma.random_num.length).to eq(5)
-  end
-
   it 'can offset the date' do
     expect(enigma.offset('040895')).to eq([1, 0, 2, 5])
   end
