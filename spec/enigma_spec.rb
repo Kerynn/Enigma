@@ -15,14 +15,16 @@ RSpec.describe Enigma do
   end
 
   it 'can generate todays date if a key not passed to enigma' do
-    todays_date = Date.new(2018, 8, 4)
-    allow(todays_date).to receive(:generate_date).and_return('040818')
-    # expect(enigma.generate_date).to eq('101122')
+    # todays_date = Date.new(2018, 8, 4)
+    # allow(todays_date).to receive(:generate_date).and_return('040818')
+    expect(enigma.generate_date).to be_a(String)
+    expect(enigma.generate_date.length).to eq(6)
   end
 
   it 'can generate a random number if a key not passed to enigma' do
-    allow(enigma).to receive(:random_num).and_return('71812')
-    # expect(enigma.generate_key).to eq(87654)
+    # allow(enigma).to receive(:random_num).and_return('71812')
+    expect(enigma.random_num).to be_a(String)
+    expect(enigma.random_num.length).to eq(5)
   end
 
   it 'can encrypt a message without a date' do
@@ -55,15 +57,15 @@ RSpec.describe Enigma do
             })
   end
 
-  # it 'can change the message to be encrypted' do
-  #   expect(enigma.shift_message('h', {A: 3})).to eq('k')
-  # end
-
-  it 'can change the message to be encrypted' do
-    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnr')
+  xit 'can create an array of the message characters for each key' do
+    expect(enigma.key_arrays('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([[['h', 'o'], 3], [['e'], 5], [['l'], 1]], [['l'], 2])
   end
 
-  it 'can encrypt a message with a key and date' do
+  xit 'can change the message to be encrypted' do
+    expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
+  end
+
+  xit 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
               key: '02715',

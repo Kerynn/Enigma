@@ -15,12 +15,11 @@ class Enigma
   end
 
   def encrypt(message, key = random_num, date = generate_date)
-    g_key = set_keys(key)
+    first_key = set_keys(key)
     offset_date = offset(date)
-    keys = generate_keys(g_key, offset_date)
-
+    final_keys = generate_keys(first_key, offset_date)
     encrypt_hash = {}
-    encrypt_hash[:encryption] = shift_message(message, keys)
+    encrypt_hash[:encryption] = shift_message(message, final_keys)
     encrypt_hash[:key] = key
     encrypt_hash[:date] = date
     encrypt_hash
@@ -58,6 +57,22 @@ class Enigma
     key_hash
   end
 
+  # def key_arrays(message, keys)
+  #   msg_array = split_msg(message)
+  #   a_array = []
+  #   b_array = []
+  #   c_array = []
+  #   d_array = []
+  #   until msg_array.empty? do
+  #     a_array << msg_array[0]
+  #     b_array << msg_array[1] if msg_array[1]
+  #     c_array << msg_array[2] if msg_array[2]
+  #     d_array << msg_array[3] if msg_array[3]
+  #     msg_array.shift(4)
+  #   end
+  #   keys_array = [[a_array, keys[:A]], [b_array, keys[:B]], [c_array, keys[:C]], [d_array, keys[:D]]]
+  # end
+
   def shift_message(message, keys)
     msg_array = split_msg(message)
     a_array = []
@@ -78,6 +93,7 @@ class Enigma
       characters[indexed_position]
     end
   end
+
   string_char = ''
     until final.join.empty? do
       final.map.with_index do |shift_char, index|
