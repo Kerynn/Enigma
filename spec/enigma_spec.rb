@@ -78,6 +78,11 @@ RSpec.describe Enigma do
           })
   end
 
+  xit 'can decrypt the message' do
+    expect(enigma.unshift_message('kjmnr', {A: 3, B: 5, C: 1, D: 2})).to eq('hello')
+    expect(enigma.unshift_message('kjmnreujhwf', {A: 3, B: 5, C: 1, D: 2})).to eq('hello there')
+  end
+
   it 'can decrypt a message with a key and date' do
     expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq({
               decryption: "hello world",
