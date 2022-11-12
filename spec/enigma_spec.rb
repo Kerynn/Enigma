@@ -72,6 +72,15 @@ RSpec.describe Enigma do
             })
   end
 
+  xit 'can encrypt a message without a key or date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:encrypt).and_return({
+                  encryption: 'keder ohulw',
+                  key: '02715',
+                  date: '040818'
+            })
+  end
+
   it 'can reconvert the characters to their original indexed_position' do
     expect(enigma.reconvert_char('k', 3)).to eq('h')
     expect(enigma.reconvert_char('c', 10)).to eq('t')
@@ -88,5 +97,14 @@ RSpec.describe Enigma do
               key: "02715",
               date: "040895"
           })
+  end
+
+  it 'can decrypt a message without a date' do
+    todays_date = Date.new(2018, 8, 4)
+    allow(todays_date).to receive(:decrypt).and_return({
+                  encryption: 'hello world',
+                  key: '02715',
+                  date: '040818'
+            })
   end
 end
