@@ -57,7 +57,7 @@ RSpec.describe Enigma do
             })
   end
 
-  it 'can create an array of the message characters for each key' do
+  xit 'can create an array of the message characters for each key' do
     expect(enigma.key_arrays('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([[['h', 'o'], 3], [['e'], 5], [['l'], 1]], [['l'], 2])
   end
 
@@ -65,15 +65,24 @@ RSpec.describe Enigma do
     expect(enigma.shifted_characters('hello', {A: 3, B: 5, C: 1, D: 2})).to eq([['k', 'r'], ['j'], ['m'], ['n']])
   end
 
-  xit 'can change the message to be encrypted' do
-    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
+  it 'can change the message to be encrypted' do
+    expect(enigma.shift_message('hello', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnr')
+    expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
   end
 
-  xit 'can encrypt a message with a key and date' do
+  it 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
               key: '02715',
               date: '040895'
+          })
+  end
+
+  it 'can decrypt a message with a key and date' do
+    expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq({
+              decryption: "hello world",
+              key: "02715",
+              date: "040895"
           })
   end
 end
