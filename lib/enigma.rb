@@ -36,12 +36,16 @@ class Enigma
   end
 
   def converted_char(char, key_value)
-    indexed_position = (characters.find_index(char) + key_value)
-    if indexed_position > 26
-      large_chars = characters * 10
-      large_chars[indexed_position]
-    else
-      characters[indexed_position]
+    if !characters.include?(char)
+      char
+    elsif
+      indexed_position = (characters.find_index(char) + key_value)
+      if indexed_position > 26
+        large_chars = characters * 10
+        large_chars[indexed_position]
+      else
+        characters[indexed_position]
+      end
     end
   end
 

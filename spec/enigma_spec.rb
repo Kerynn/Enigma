@@ -39,8 +39,9 @@ RSpec.describe Enigma do
     expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
   end
 
-  xit 'can take a non-character and return that original character' do
+  it 'can take a non-character and return that original character' do
     expect(enigma.shift_message('hi!', {A: 3, B: 5, C: 1, D: 2})).to eq('kn!')
+    expect(enigma.shift_message('we!re happy%', {A: 3, B: 5, C: 1, D: 2})).to eq('zj!theicsuz%')
   end
 
   it 'can encrypt a message with a key and date' do
@@ -54,6 +55,14 @@ RSpec.describe Enigma do
   it 'can take capitalized character and make lower case' do
     expect(enigma.encrypt('HEllo woRld', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
+              key: '02715',
+              date: '040895'
+          })
+  end
+
+  it 'can take non-character and return that original character' do
+    expect(enigma.encrypt('HEl!lo woRl%d', '02715', '040895')).to eq({
+              encryption: 'ked!oosprrd%g',
               key: '02715',
               date: '040895'
           })
