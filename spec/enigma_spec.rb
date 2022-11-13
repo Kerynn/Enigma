@@ -39,6 +39,11 @@ RSpec.describe Enigma do
     expect(enigma.shift_message('hello there', {A: 3, B: 5, C: 1, D: 2})).to eq('kjmnreujhwf')
   end
 
+  it 'can take a non-character and return that original character' do
+    expect(enigma.shift_message('hi!', {A: 3, B: 5, C: 1, D: 2})).to eq('kn!')
+    expect(enigma.shift_message('we!re happy%', {A: 3, B: 5, C: 1, D: 2})).to eq('zj!theicsuz%')
+  end
+
   it 'can encrypt a message with a key and date' do
     expect(enigma.encrypt('hello world', '02715', '040895')).to eq({
               encryption: 'keder ohulw',
@@ -55,6 +60,14 @@ RSpec.describe Enigma do
           })
   end
 
+  it 'can take non-character and return that original character' do
+    expect(enigma.encrypt('HEl!lo woRl%d', '02715', '040895')).to eq({
+              encryption: 'ked!oosprrd%g',
+              key: '02715',
+              date: '040895'
+          })
+  end
+
   it 'can encrypt a message without a date' do
     todays_date = Date.new(2018, 8, 4)
     allow(todays_date).to receive(:encrypt).and_return({
@@ -62,15 +75,11 @@ RSpec.describe Enigma do
                   key: '02715',
                   date: '040818'
             })
+    expect(enigma.encrypt('hello world', '02715')).to be_a(Hash)
   end
 
-  xit 'can encrypt a message without a key or date' do
-    todays_date = Date.new(2018, 8, 4)
-    allow(todays_date).to receive(:encrypt).and_return({
-                  encryption: 'keder ohulw',
-                  key: '02715',
-                  date: '040818'
-            })
+  it 'can encrypt a message without a key or date' do
+    expect(enigma.encrypt('hello world')).to be_a(Hash)
   end
 
   it 'can reconvert the characters to their original indexed_position' do
@@ -81,6 +90,10 @@ RSpec.describe Enigma do
   it 'can unshift the message to be the original message' do
     expect(enigma.unshift_message('kjmnr', {A: 3, B: 5, C: 1, D: 2})).to eq('hello')
     expect(enigma.unshift_message('kjmnreujhwf', {A: 3, B: 5, C: 1, D: 2})).to eq('hello there')
+  end
+
+  it 'can unshift the message with non-characters to be the original message' do
+    expect(enigma.unshift_message('kjmnr!', {A: 3, B: 5, C: 1, D: 2})).to eq('hello!')
   end
 
   it 'can decrypt a message with a key and date' do
@@ -98,5 +111,6 @@ RSpec.describe Enigma do
                   key: '02715',
                   date: '040818'
             })
+    expect(enigma.encrypt('keder ohulw', '02715')).to be_a(Hash)
   end
 end
