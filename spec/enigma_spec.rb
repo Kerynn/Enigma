@@ -98,5 +98,6 @@ RSpec.describe Enigma do
                   key: '02715',
                   date: '040818'
             })
+    expect(enigma.encrypt('keder ohulw', '02715')).to be_a(Hash)
   end
 end
