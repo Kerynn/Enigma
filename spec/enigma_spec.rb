@@ -47,6 +47,14 @@ RSpec.describe Enigma do
           })
   end
 
+  it 'can take capitalized character and make lower case' do
+    expect(enigma.encrypt('HEllo woRld', '02715', '040895')).to eq({
+              encryption: 'keder ohulw',
+              key: '02715',
+              date: '040895'
+          })
+  end
+
   it 'can encrypt a message without a date' do
     todays_date = Date.new(2018, 8, 4)
     allow(todays_date).to receive(:encrypt).and_return({
