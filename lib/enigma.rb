@@ -63,7 +63,7 @@ class Enigma
     offset_date = offset(date)
     final_keys = generate_keys(first_key, offset_date)
     encrypt_hash = {}
-    encrypt_hash[:encryption] = shift_message(message, final_keys)
+    encrypt_hash[:encryption] = shift_message(message.downcase, final_keys)
     encrypt_hash[:key] = key
     encrypt_hash[:date] = date
     encrypt_hash
