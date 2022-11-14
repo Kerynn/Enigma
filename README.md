@@ -16,8 +16,8 @@
 
 ### Test Driven Development
 
-* I believe meets expectations with all methods having a passing test. Obvious edge cases (such as a non-character and capitalization) are also tested and accounted for, so the message can still encrypt and decrypt. Simplecov showing 100% coverage.
+* I believe meets expectations with all methods having a passing test. Obvious edge cases (such as a non-character and capitalization) are also tested and accounted for, so the message can still encrypt and decrypt. Simplecov showing 100% coverage. I also tried to use a stub for encrypting & decrypting a message without a date, but not sure if it is actually working.
 
 ### Version Control
 
-* I think somewhere between a 3 and 4 for version control. I have over 40 commits and over 4 pull requests. I tried to be thoughtful about my branches to practice developer empathy, but also found that it helped me structure which piece of functionality to work on, and keep track of what was done and what to focus on next. 
+* I think somewhere between a 3 and 4 for version control. I have over 40 commits and over 4 pull requests. I tried to be thoughtful about my branches to practice developer empathy, but also found that it helped me structure which piece of functionality to work on, and keep track of what was done and what to focus on next.
