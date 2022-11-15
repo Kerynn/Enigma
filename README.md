@@ -8,7 +8,7 @@
 
 ### Object Oriented Programming
 
-* I think I am somewhere between a 2 or 3 grade for Object Oriented Programming. This is because I did not break down my enigma class into smaller classes. Once I had the enigma fully working, I made a couple attempts to break it down into smaller classes, but things would break, and I eventually decided to leave it before totally destroying my project. I think if I were to do this project again, I would try to have a better plan for potential classes, and build those from the beginning instead of trying to do it at the end. However, I was able to implement a module to my project that includes the elements that have to be generated in order for enigma to work, such as the characters, date, and a random 5 digit number if date/key are not passed when running encrypt or decrypt.
+* I think I am somewhere between a 2 or 3 grade for Object Oriented Programming. This is because I did not break down my enigma class into smaller classes. Once I had the enigma class fully working, I made a couple attempts to break it down into smaller classes, but things would break, and I eventually decided to leave it before totally destroying my project. I think if I were to do this project again, I would try to have a better plan for potential classes, and build those from the beginning instead of trying to do it at the end. However, I was able to implement a module to my project that includes the elements that have to be generated in order for enigma to work, such as the characters, date, and a random 5 digit number if date/key are not passed when running encrypt or decrypt.
 
 ### Ruby Conventions and Mechanics
 
